@@ -1,11 +1,9 @@
+import "@mantine/core/styles.css";
 import type { Metadata } from "next";
-import {
-  ColorSchemeScript,
-  mantineHtmlProps,
-  MantineProvider,
-} from "@mantine/core";
-import theme from "./theme";
-import "./globals.css";
+import { ColorSchemeScript, mantineHtmlProps } from "@mantine/core";
+
+import { AuthProvider } from "@/lib/auth/AuthContext";
+import ClientRoot from "../ClientRoot";
 
 export const metadata: Metadata = {
   title: "Next App Mantine Tailwind Template",
@@ -23,7 +21,9 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body className="antialiased">
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <AuthProvider>
+          <ClientRoot>{children}</ClientRoot>
+        </AuthProvider>
       </body>
     </html>
   );
